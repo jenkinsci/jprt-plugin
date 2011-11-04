@@ -159,7 +159,7 @@
     <dependency>
       <groupId>org.jvnet.hudson.plugins.jprt</groupId>
       <artifactId>jprt-hudson</artifactId>
-      <version>hudson-SNAPSHOT</version>
+      <version>hudson-1.0</version>
     </dependency>
   </dependencies>
 
