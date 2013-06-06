@@ -35,7 +35,7 @@
   </parent>
 
   <artifactId>jprt</artifactId>
-  <version>1.1</version>
+  <version>1.2-SNAPSHOT</version>
   <packaging>hpi</packaging>
 
   <name>JPRT Plugin</name>
