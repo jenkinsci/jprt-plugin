@@ -3,12 +3,15 @@ package hudson.plugins.jprt;
 import JPRT.shared.GlobalProperties;
 import hudson.Extension;
 import hudson.model.Hudson;
+import hudson.model.ItemGroup;
 import hudson.model.Items;
 import hudson.model.Job;
 import hudson.model.TopLevelItem;
 import hudson.model.TopLevelItemDescriptor;
 import hudson.model.ViewJob;
 import hudson.model.Descriptor.FormException;
+import hudson.util.AlternativeUiTextProvider;
+
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -40,13 +43,12 @@ public class JPRTJob extends ViewJob<JPRTJob,JPRTRun> implements TopLevelItem {
      */
     private volatile String archiveUrl;
 
-    public JPRTJob(String name) {
-        super(Hudson.getInstance(), name);
+    public JPRTJob(ItemGroup parent, String name) {
+        super(parent, name);
     }
 
-    @Override
-    public Hudson getParent() {
-        return (Hudson)super.getParent();
+    public JPRTJob(String name) {
+        super(Hudson.getInstance(), name);
     }
 
     public File getArchiveRoot() {
@@ -55,6 +57,11 @@ public class JPRTJob extends ViewJob<JPRTJob,JPRTRun> implements TopLevelItem {
 
     public String getArchiveUrl() {
         return archiveUrl;
+    }  
+    
+    @Override
+    public String getPronoun() {
+        return AlternativeUiTextProvider.get(PRONOUN, this, "JPRT Monitor");
     }
 
     @Override
@@ -133,6 +140,11 @@ public class JPRTJob extends ViewJob<JPRTJob,JPRTRun> implements TopLevelItem {
 
         public JPRTJob newInstance(String name) {
             return new JPRTJob(name);
+        }
+
+        @Override
+        public TopLevelItem newInstance(ItemGroup parent, String name) {
+            return new JPRTJob(parent, name);
         }
     };
 
